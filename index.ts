@@ -2,12 +2,15 @@
 import Fastify from "fastify";
 import crypto from "crypto";
 import discord from "discord.js";
+import dotenv from 'dotenv';
+
+dotenv.config()
 
 const secret =
-  "pb_key_b54bad5dc3225de1e16cb0726b75927a68c775c8feef1503c7fe8dbdaa0bd01e";
+  process.env.SECRET as string
 
 const discord_wh =
-  "https://canary.discord.com/api/webhooks/1200915220869152949/TEA6kEiVmuUaC-T7k0aOpzyla7z0wSKxtJuXswCfVZx4TvBZ6NPppPIBPrcKN_tBldul";
+  process.env.WEBHOOKURL as string
 
 const fastify = Fastify({
   logger: true,
