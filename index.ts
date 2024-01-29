@@ -39,7 +39,7 @@ fastify.post("/webhook", async function (request, reply) {
         break;
       case "order.transaction.success" || "order.transaction.paid":
         content = "Order has been Paid!"
-        color = "#AAFF00"
+        color = "#66FF00"
         break;
       case "order.transaction.refunded":
         content = "Order has been Refunded!"
