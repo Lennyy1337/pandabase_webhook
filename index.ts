@@ -66,7 +66,6 @@ fastify.post("/webhook", async function (request, reply) {
       email = body.event.data.email
     }
     const webhook = new discord.WebhookClient({ url: discord_wh });
-    console.log(body)
     const embed = new discord.EmbedBuilder()
       .setTitle(body.object)
       .addFields(
