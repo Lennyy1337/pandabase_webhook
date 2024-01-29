@@ -84,6 +84,7 @@ fastify.post("/webhook", async function (request, reply) {
     });
   }catch(e){
     console.log(e)
+    reply.status(500).send("messed up")
   }
   
 });
