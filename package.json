@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "start": "tsx watch ./index.ts"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "fastify": "^4.25.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.0"
+  }
+}
