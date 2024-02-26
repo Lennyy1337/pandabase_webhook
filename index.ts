@@ -46,7 +46,7 @@ fastify.post("/webhook", async function (request, reply) {
         color = "#CC5500"
         break;
       case "order.transaction.disputed":
-        content = "A dispute has been detected! @👑 │ Owner @🔥 | Nexus Manager"
+        content = "A dispute has been detected!"
         color = "#880808"
       case "order.transaction.not_paid":
         content = "Order has not been paid."
