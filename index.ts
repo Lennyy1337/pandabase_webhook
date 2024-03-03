@@ -57,7 +57,7 @@ fastify.post("/webhook", async function (request, reply) {
     }
 
     if (!body) {
-      reply.status(403).send("forbidden");
+      reply.status(400).send("No body");
       return;
     }
     if (!body.event.data.email){
@@ -82,6 +82,7 @@ fastify.post("/webhook", async function (request, reply) {
         "https://cdn.discordapp.com/icons/1162144928596508733/72986a36a8e328d06c99a16b0dc5e603.png?size=4096",
       embeds: [embed],
     });
+    reply.send(200)
   }catch(e){
     console.log(e)
     reply.status(500).send("messed up")
