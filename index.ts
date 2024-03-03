@@ -13,7 +13,7 @@ const discord_wh =
   process.env.WEBHOOKURL as string
 
 const fastify = Fastify({
-  logger: true,
+  logger: false,
 });
 
 fastify.post("/webhook", async function (request, reply) {
@@ -25,6 +25,7 @@ fastify.post("/webhook", async function (request, reply) {
 
     if (request.headers["x-pandabase-signature"] !== signature) {
       reply.status(403).send("forbidden");
+      console.log("fake request")
       return;
     }
 
@@ -58,6 +59,7 @@ fastify.post("/webhook", async function (request, reply) {
 
     if (!body) {
       reply.status(400).send("No body");
+      console.log("no body")
       return;
     }
     if (!body.event.data.email){
