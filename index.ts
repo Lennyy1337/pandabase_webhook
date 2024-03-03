@@ -83,6 +83,7 @@ fastify.post("/webhook", async function (request, reply) {
       embeds: [embed],
     });
     reply.send(200)
+    console.log("Successful request!")
   }catch(e){
     console.log(e)
     reply.status(500).send("messed up")
