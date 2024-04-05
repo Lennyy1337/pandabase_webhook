@@ -19,6 +19,7 @@ const fastify = Fastify({
 fastify.post("/webhook", async function (request, reply) {
   try{
     const eventData = { event: request.body, timestamp: request.headers['X-Pandabase-Timestamp'] };
+    console.log(eventData)
     const signature = crypto.createHmac('sha256', secret)
       .update(JSON.stringify(eventData))
       .digest('hex');
