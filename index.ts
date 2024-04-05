@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config()
 
 const secret =
-  process.env.SECRET as string
+  "wh_" + process.env.SECRET as string 
 
 const discord_wh =
   process.env.WEBHOOKURL as string
@@ -19,7 +19,7 @@ const fastify = Fastify({
 fastify.post("/webhook", async function (request, reply) {
   try{
     console.log(request.headers)
-    const eventData = { event: request.body, timestamp: request.headers['x-pandabase-timestamp'] };
+    const eventData = { event: request.body as {type: any, id: string, data: any}, timestamp: request.headers['x-pandabase-timestamp'] };
     console.log(eventData)
     const signature = crypto.createHmac('sha256', secret)
       .update(JSON.stringify(eventData))
@@ -35,26 +35,26 @@ fastify.post("/webhook", async function (request, reply) {
     let content: any = undefined
     let color: any = undefined
     let email: any = undefined
-    switch (body.event.type){
-      case "order.transaction.pending":
+    switch (eventData.event.type){
+      case "order.pending":
         content = "New Pending Transaction!"
         color = "#FFBF00"
         break;
-      case "order.transaction.success" || "order.transaction.paid":
+      case "order.paid":
         content = "Order has been Paid!"
         color = "#66FF00"
         break;
-      case "order.transaction.refunded":
+      case "order.refunded":
         content = "Order has been Refunded!"
         color = "#CC5500"
         break;
-      case "order.transaction.disputed":
+      case "order.disputed":
         content = "A dispute has been detected!"
         color = "#880808"
-      case "order.transaction.not_paid":
+      case "order.not_paid":
         content = "Order has not been paid."
         color = "#CC5500"
-      case "order.transaction.failed":
+      case "order.failed":
         content = "Transaction Failed!"
         color = "#880808"
     }
