@@ -19,13 +19,13 @@ const fastify = Fastify({
 fastify.post("/webhook", async function (request, reply) {
   try{
     console.log(request.headers)
-    const eventData = { event: request.body, timestamp: request.headers['X-Pandabase-Timestamp'] };
+    const eventData = { event: request.body, timestamp: request.headers['x-pandabase-timestamp'] };
     console.log(eventData)
     const signature = crypto.createHmac('sha256', secret)
       .update(JSON.stringify(eventData))
       .digest('hex');
 
-    if (request.headers["X-Pandabase-Signature"] !== signature) {
+    if (request.headers["x-pandabase-signature"] !== signature) {
       reply.status(403).send("forbidden");
       console.log("fake request")
       return;
